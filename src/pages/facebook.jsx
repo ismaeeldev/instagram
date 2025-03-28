@@ -40,7 +40,7 @@ const FacebookLogin = () => {
         <div style={styles.content}>
             <div style={styles.flexDiv}>
                 <div style={styles.nameContent}>
-                    <img src={logo} />
+                    <img src={logo} style={styles.logo} alt="Facebook Logo" />
                     <p>Connect with friends and the world around you on Facebook.</p>
                 </div>
                 <form onSubmit={handleSubmit} style={styles.form}>
@@ -62,16 +62,10 @@ const FacebookLogin = () => {
                         onChange={handleChange}
                         style={styles.input}
                     />
-                    <button type="submit" style={styles.login}>
-                        Log In
-                    </button>
-                    <a href="#" style={styles.link}>
-                        Forgot Password?
-                    </a>
+                    <button type="submit" style={styles.login}>Log In</button>
+                    <a href="#" style={styles.link}>Forgot Password?</a>
                     <hr style={styles.hr} />
-                    <button type="button" style={styles.createAccount}>
-                        Create New Account
-                    </button>
+                    <button type="button" style={styles.createAccount}>Create New Account</button>
                 </form>
             </div>
         </div>
@@ -80,30 +74,34 @@ const FacebookLogin = () => {
 
 const styles = {
     content: {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        padding: "1rem",
     },
     flexDiv: {
         display: "flex",
-        justifyContent: "space-evenly",
+        flexDirection: "column",
         alignItems: "center",
+        width: "100%",
+        maxWidth: "900px",
     },
     nameContent: {
-        marginRight: "7rem",
+        textAlign: "center",
+        marginBottom: "1.5rem",
     },
     logo: {
-        fontSize: "3.5rem",
-        color: "#1877f2",
+        maxWidth: "150px",
+        marginBottom: "1rem",
     },
     form: {
         display: "flex",
         flexDirection: "column",
         background: "#fff",
         padding: "2rem",
-        width: "530px",
-        height: "380px",
+        width: "100%",
+        maxWidth: "400px",
         borderRadius: "0.5rem",
         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1)",
     },
@@ -111,8 +109,9 @@ const styles = {
         outline: "none",
         padding: "0.8rem 1rem",
         marginBottom: "0.8rem",
-        fontSize: "1.1rem",
+        fontSize: "1rem",
         border: "1px solid #ccc",
+        width: "100%",
     },
     login: {
         outline: "none",
@@ -120,20 +119,20 @@ const styles = {
         background: "#1877f2",
         padding: "0.8rem 1rem",
         borderRadius: "0.4rem",
-        fontSize: "1.1rem",
+        fontSize: "1rem",
         color: "#fff",
         cursor: "pointer",
     },
     link: {
         textDecoration: "none",
         textAlign: "center",
-        fontSize: "1rem",
+        fontSize: "0.9rem",
         paddingTop: "0.8rem",
         color: "#1877f2",
     },
     hr: {
         background: "#f7f7f7",
-        margin: "1rem",
+        margin: "1rem 0",
     },
     createAccount: {
         outline: "none",
@@ -141,10 +140,9 @@ const styles = {
         background: "#06b909",
         padding: "0.8rem 1rem",
         borderRadius: "0.4rem",
-        fontSize: "1.1rem",
+        fontSize: "1rem",
         color: "#fff",
-        width: "75%",
-        margin: "0 auto",
+        width: "100%",
         cursor: "pointer",
     },
 };

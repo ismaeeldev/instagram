@@ -40,13 +40,7 @@ const Login = () => {
 
 
 
-    const handleFb = () => {
-        navigate('facebook/login');
-    }
-
-    const handleGoogle = () => {
-        navigate('google/login');
-    }
+   
 
     return (
         <div className="flex justify-center items-center min-h-screen px-4 ">
